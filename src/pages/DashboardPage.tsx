@@ -1,5 +1,6 @@
 import PageHeader from '@/components/common/PageHeader';
 import StatCard from '@/components/common/StatCard';
+
 function DashboardPage() {
   return (
     <>
@@ -7,7 +8,6 @@ function DashboardPage() {
         title="Dashboard"
         description="Overview of your task management system."
       />
-
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <StatCard title="Total Tasks" value="0" />
         <StatCard title="Completed" value="0" />
