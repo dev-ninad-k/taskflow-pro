@@ -1,12 +1,9 @@
 function Topbar() {
   return (
-    <header
-      style={{
-        padding: '1rem',
-        borderBottom: '1px solid #ddd',
-      }}
-    >
-      <h3>Welcome to TaskFlow Pro</h3>
+    <header className="border-b border-gray-200 bg-white px-6 py-4">
+      <h2 className="text-xl font-semibold text-gray-800">
+        Welcome to TaskFlow Pro
+      </h2>
     </header>
   );
 }

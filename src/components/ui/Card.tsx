@@ -4,14 +4,7 @@ type CardProps = {
 
 function Card({ children }: CardProps) {
   return (
-    <div
-      style={{
-        border: '1px solid #ddd',
-        borderRadius: '8px',
-        padding: '1rem',
-        backgroundColor: '#fff',
-      }}
-    >
+    <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
       {children}
     </div>
   );
