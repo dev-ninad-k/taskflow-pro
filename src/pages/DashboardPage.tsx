@@ -1,17 +1,20 @@
-import Button from '@/components/ui/Button';
-import Card from '@/components/ui/Card';
-import Input from '@/components/ui/Input';
-
+import PageHeader from '@/components/common/PageHeader';
+import StatCard from '@/components/common/StatCard';
 function DashboardPage() {
   return (
-    <Card>
-      <h1 className="mb-4 text-2xl font-bold">Dashboard</h1>
-      <div className="space-y-4">
-        <Input placeholder="Search tasks..." />
+    <>
+      <PageHeader
+        title="Dashboard"
+        description="Overview of your task management system."
+      />
 
-        <Button>Test Button</Button>
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <StatCard title="Total Tasks" value="0" />
+        <StatCard title="Completed" value="0" />
+        <StatCard title="In Progress" value="0" />
+        <StatCard title="Completion Rate" value="0%" />
       </div>
-    </Card>
+    </>
   );
 }
 
