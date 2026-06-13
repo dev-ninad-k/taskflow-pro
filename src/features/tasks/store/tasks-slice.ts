@@ -28,6 +28,9 @@ const tasksSlice = createSlice({
     setStatusFilter(state, action) {
       state.filters.status = action.payload;
     },
+    addTask: (state, action) => {
+      state.tasks.unshift(action.payload);
+    },
   },
 
   extraReducers: (builder) => {
@@ -51,4 +54,4 @@ const tasksSlice = createSlice({
 });
 
 export const tasksReducer = tasksSlice.reducer;
-export const { setSearch, setStatusFilter } = tasksSlice.actions;
+export const { setSearch, setStatusFilter, addTask } = tasksSlice.actions;

@@ -11,6 +11,7 @@ import { loadTasks } from '@/features/tasks/store/tasks-thunks';
 import TaskList from '@/features/tasks/components/TaskList';
 import { selectFilteredTasks } from '@/features/tasks/store/selectors';
 import TaskFilters from '@/features/tasks/components/TaskFilters';
+import TaskForm from '@/features/tasks/components/TaskForm';
 
 function TasksPage() {
   const dispatch = useAppDispatch();
@@ -35,6 +36,7 @@ function TasksPage() {
 
   return (
     <>
+      <TaskForm />
       <PageHeader title="Tasks" description="Manage all your tasks." />
       <TaskFilters />
 
