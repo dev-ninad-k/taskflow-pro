@@ -9,9 +9,13 @@ import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { loadTasks } from '@/features/tasks/store/tasks-thunks';
 
 import TaskList from '@/features/tasks/components/TaskList';
+import { selectFilteredTasks } from '@/features/tasks/store/selectors';
+import TaskFilters from '@/features/tasks/components/TaskFilters';
 
 function TasksPage() {
   const dispatch = useAppDispatch();
+
+  const filteredTasks = useAppSelector(selectFilteredTasks);
 
   const { tasks, loading, error } = useAppSelector((state) => state.tasks);
 
@@ -32,11 +36,12 @@ function TasksPage() {
   return (
     <>
       <PageHeader title="Tasks" description="Manage all your tasks." />
+      <TaskFilters />
 
       {!tasks.length ? (
         <EmptyState title="No Tasks" description="No tasks available." />
       ) : (
-        <TaskList tasks={tasks} />
+        <TaskList tasks={filteredTasks} />
       )}
     </>
   );

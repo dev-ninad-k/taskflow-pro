@@ -9,6 +9,10 @@ const initialState: TasksState = {
   tasks: [],
   loading: false,
   error: null,
+  filters: {
+    search: '',
+    status: 'all',
+  },
 };
 
 const tasksSlice = createSlice({
@@ -16,7 +20,15 @@ const tasksSlice = createSlice({
 
   initialState,
 
-  reducers: {},
+  reducers: {
+    setSearch(state, action) {
+      state.filters.search = action.payload;
+    },
+
+    setStatusFilter(state, action) {
+      state.filters.status = action.payload;
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -39,3 +51,4 @@ const tasksSlice = createSlice({
 });
 
 export const tasksReducer = tasksSlice.reducer;
+export const { setSearch, setStatusFilter } = tasksSlice.actions;
