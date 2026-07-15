@@ -1,4 +1,5 @@
 import { useDraggable } from '@dnd-kit/core';
+import { CSS } from '@dnd-kit/utilities';
 import type { Task } from '../../types';
 
 type Props = {
@@ -6,9 +7,14 @@ type Props = {
 };
 
 function KanbanTaskCard({ task }: Props) {
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: task.id,
-  });
+  const { attributes, listeners, setNodeRef, transform, isDragging } =
+    useDraggable({
+      id: task.id,
+    });
+
+  const style = {
+    transform: CSS.Translate.toString(transform),
+  };
 
   const priorityStyles = {
     low: 'bg-gray-100 text-gray-700',
@@ -16,11 +22,11 @@ function KanbanTaskCard({ task }: Props) {
     high: 'bg-red-100 text-red-700',
   };
 
-  const style = transform
-    ? {
-        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-      }
-    : undefined;
+  const statusStyles = {
+    todo: 'bg-gray-100 text-gray-700',
+    'in-progress': 'bg-yellow-100 text-yellow-700',
+    done: 'bg-green-100 text-green-700',
+  };
 
   return (
     <div
@@ -28,42 +34,48 @@ function KanbanTaskCard({ task }: Props) {
       style={style}
       {...listeners}
       {...attributes}
-      className="
+      className={`
         rounded-lg
+        border
         bg-white
         p-4
         shadow-sm
-        border
-        border-gray-200
-        cursor-grab
         transition
-        hover:shadow-md
+        cursor-grab
         active:cursor-grabbing
-      "
+        hover:-translate-y-1
+        hover:shadow-md
+        ${isDragging ? 'opacity-50' : ''}
+      `}
     >
-      <h3 className="font-semibold text-gray-900">{task.title}</h3>
+      <div className="space-y-3">
+        <h3 className="font-semibold text-gray-900">{task.title}</h3>
 
-      {task.description && (
-        <p className="mt-2 text-sm text-gray-600 line-clamp-2">
-          {task.description}
-        </p>
-      )}
+        {task.description && (
+          <p className="line-clamp-2 text-sm text-gray-500">
+            {task.description}
+          </p>
+        )}
 
-      <div className="mt-3 flex items-center justify-between">
-        <span
-          className={`
-            rounded-full
-            px-2
-            py-1
-            text-xs
-            font-medium
-            ${priorityStyles[task.priority]}
-          `}
-        >
-          {task.priority}
-        </span>
+        <div className="flex items-center justify-between">
+          <span
+            className={`
+              rounded-full px-2 py-1 text-xs font-medium
+              ${statusStyles[task.status]}
+            `}
+          >
+            {task.status}
+          </span>
 
-        <span className="text-xs text-gray-500">{task.status}</span>
+          <span
+            className={`
+              rounded-full px-2 py-1 text-xs font-medium
+              ${priorityStyles[task.priority]}
+            `}
+          >
+            {task.priority}
+          </span>
+        </div>
       </div>
     </div>
   );
