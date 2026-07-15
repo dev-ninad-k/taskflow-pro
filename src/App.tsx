@@ -1,5 +1,7 @@
+import { AppProvider } from '@/app/providers/AppProvider';
+
 function App() {
-  return <h1>TaskFlow Pro</h1>;
+  return <AppProvider />;
 }
 
 export default App;

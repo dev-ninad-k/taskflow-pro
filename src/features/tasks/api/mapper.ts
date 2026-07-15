@@ -4,16 +4,17 @@ import type { TaskDto } from './dto';
 
 export function mapTaskDtoToTask(dto: TaskDto): Task {
   return {
-    id: dto.id,
+    id: String(dto.id),
     title: dto.title,
 
+    // API does NOT provide these → you must default them
     description: '',
 
     status: dto.completed ? 'done' : 'todo',
 
     priority: 'medium',
 
-    completed: dto.completed,
+    completed: dto.completed ?? false,
 
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),

@@ -1,11 +1,23 @@
-// features/tasks/store/types.ts
-
-import type { Task } from '@/features/tasks/types';
-import type { TaskFilters } from './filter-types';
+import type { Task, TaskStatus } from '../types';
 
 export interface TasksState {
-  tasks: Task[];
-  loading: boolean;
-  error: string | null;
-  filters: TaskFilters;
+  entities: {
+    tasksById: Record<string, Task>;
+    taskIds: string[];
+  };
+
+  server: {
+    loading: boolean;
+    creating: boolean;
+    updatingIds: string[];
+    deletingIds: string[];
+    error: string | null;
+  };
+
+  ui: {
+    filters: {
+      search: string;
+      status: TaskStatus | 'all';
+    };
+  };
 }

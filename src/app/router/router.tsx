@@ -6,6 +6,7 @@ import DashboardPage from '@/pages/DashboardPage';
 import TasksPage from '@/pages/TasksPage';
 import BoardPage from '@/pages/BoardPage';
 import NotFoundPage from '@/pages/NotFoundPage';
+import KanbanPage from '@/pages/KanbanPage';
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
       {
         path: 'board',
         element: <BoardPage />,
+      },
+      {
+        path: '/kanban',
+        element: <KanbanPage />,
       },
     ],
   },

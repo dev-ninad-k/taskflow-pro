@@ -3,6 +3,7 @@ import Topbar from '@/components/navigation/Topbar';
 import { Outlet } from 'react-router-dom';
 
 function DashboardLayout() {
+  console.log('DashboardLayout render');
   return (
     <div className="flex min-h-screen bg-gray-50">
       <Sidebar />

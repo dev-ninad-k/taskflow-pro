@@ -19,6 +19,10 @@ function Sidebar() {
         <NavLink className={linkClass} to="/board">
           Board
         </NavLink>
+
+        <NavLink className={linkClass} to="/kanban">
+          Kanban Board
+        </NavLink>
       </nav>
     </aside>
   );

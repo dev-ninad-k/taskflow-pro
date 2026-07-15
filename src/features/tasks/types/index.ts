@@ -1,4 +1,4 @@
-export type { Task } from './task';
-export type { TaskStatus } from './task-status';
-export type { TaskPriority } from './task-priority';
-export type { TaskFormData } from './task-form-data';
+export type { Task, TaskStatus, TaskPriority } from './domain';
+export type { CreateTaskDto, UpdateTaskDto, TaskUpdatePayload } from './api';
+export type { TaskFormData } from './ui';
+export type { CreateTaskThunkPayload } from './redux';

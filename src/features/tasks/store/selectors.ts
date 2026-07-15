@@ -1,20 +1,44 @@
 import type { RootState } from '@/app/store/store';
+import type { Task } from '../types';
+import { createSelector } from '@reduxjs/toolkit';
 
-export const selectTasks = (state: RootState) => state.tasks.tasks;
+/**
+ * Base selector: returns normalized array safely
+ */
+const selectTaskIds = (state: RootState) => state.tasks.entities.taskIds;
 
-export const selectFilters = (state: RootState) => state.tasks.filters;
-export const selectFilteredTasks = (state: RootState) => {
-  const tasks = state.tasks.tasks;
+const selectTasksById = (state: RootState) => state.tasks.entities.tasksById;
 
-  const { search, status } = state.tasks.filters;
+/**
+ * Memoized base task list
+ */
+export const selectTasks = createSelector(
+  [selectTaskIds, selectTasksById],
+  (taskIds, tasksById): Task[] => {
+    return taskIds.map((id) => tasksById[id]).filter(Boolean);
+  },
+);
 
-  return tasks.filter((task) => {
-    const matchesSearch = task.title
-      .toLowerCase()
-      .includes(search.toLowerCase());
+/**
+ * Filters state only
+ */
+export const selectFilters = (state: RootState) => state.tasks.ui.filters;
 
-    const matchesStatus = status === 'all' ? true : task.status === status;
+/**
+ * Derived filtered tasks (UI-ready)
+ */
+export const selectFilteredTasks = createSelector(
+  [selectTasks, selectFilters],
+  (tasks, filters) => {
+    const searchLower = filters.search.toLowerCase();
 
-    return matchesSearch && matchesStatus;
-  });
-};
+    return tasks.filter((task) => {
+      const matchesSearch = task.title.toLowerCase().includes(searchLower);
+
+      const matchesStatus =
+        filters.status === 'all' ? true : task.status === filters.status;
+
+      return matchesSearch && matchesStatus;
+    });
+  },
+);

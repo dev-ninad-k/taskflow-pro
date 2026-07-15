@@ -1,51 +1,57 @@
+import { useAppSelector } from '@/app/store/hooks';
+import TaskForm from '@/features/tasks/components/TaskForm';
+import TaskFilters from '@/features/tasks/components/TaskFilters';
+import TaskList from '@/features/tasks/components/TaskList';
+import EmptyState from '@/components/common/EmptyState';
+import { selectFilteredTasks } from '@/features/tasks/store/selectors';
+import ErrorState from '@/components/common/ErrorState';
+import { loadTasks } from '@/features/tasks/store/tasks-thunks';
+import { useAppDispatch } from '@/app/store/hooks';
+import PageLoader from '@/components/common/PageLoader';
+
 import { useEffect } from 'react';
 
-import PageHeader from '@/components/common/PageHeader';
-import LoadingSpinner from '@/components/common/LoadingSpinner';
-import EmptyState from '@/components/common/EmptyState';
-
-import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
-
-import { loadTasks } from '@/features/tasks/store/tasks-thunks';
-
-import TaskList from '@/features/tasks/components/TaskList';
-import { selectFilteredTasks } from '@/features/tasks/store/selectors';
-import TaskFilters from '@/features/tasks/components/TaskFilters';
-import TaskForm from '@/features/tasks/components/TaskForm';
-
 function TasksPage() {
+  console.log('TasksPage render');
   const dispatch = useAppDispatch();
-
-  const filteredTasks = useAppSelector(selectFilteredTasks);
-
-  const { tasks, loading, error } = useAppSelector((state) => state.tasks);
-
   useEffect(() => {
-    if (!tasks.length) {
-      dispatch(loadTasks());
-    }
-  }, [dispatch, tasks.length]);
+    console.log('TasksPage mounted');
+
+    return () => {
+      console.log('TasksPage unmounted');
+    };
+  }, []);
+
+  const tasks = useAppSelector(selectFilteredTasks);
+  const loading = useAppSelector((state) => state.tasks.server.loading);
+  const error = useAppSelector((state) => state.tasks.server.error);
 
   if (loading) {
-    return <LoadingSpinner />;
+    return <PageLoader />;
   }
 
   if (error) {
-    return <EmptyState title="Error" description={error} />;
+    return <ErrorState message={error} onRetry={() => dispatch(loadTasks())} />;
   }
 
   return (
-    <>
+    <div className="space-y-6">
+      {/* CREATE TASK */}
       <TaskForm />
-      <PageHeader title="Tasks" description="Manage all your tasks." />
+
+      {/* FILTERS */}
       <TaskFilters />
 
-      {!tasks.length ? (
-        <EmptyState title="No Tasks" description="No tasks available." />
+      {/* TASK LIST */}
+      {tasks.length === 0 ? (
+        <EmptyState
+          title="No tasks found"
+          description="Create your first task to get started"
+        />
       ) : (
-        <TaskList tasks={filteredTasks} />
+        <TaskList tasks={tasks} />
       )}
-    </>
+    </div>
   );
 }
 

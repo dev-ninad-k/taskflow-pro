@@ -1,0 +1,40 @@
+{
+  "todos": [
+    {
+      "title": "Learn Redux Toolkit",
+      "completed": true,
+      "id": "1"
+    },
+    {
+      "title": "Build TaskFlow Pro",
+      "completed": true,
+      "id": "2"
+    },
+    {
+      "title": "qqwet",
+      "completed": true,
+      "id": "ekYMWwKVu0M"
+    },
+    {
+      "title": "HHH",
+      "completed": false,
+      "id": "WSfim4HnTJg"
+    },
+    {
+      "title": "RKO",
+      "completed": false,
+      "id": "1px48vgJ-qw"
+    },
+    {
+      "title": "qweerty1",
+      "completed": true,
+      "id": "NCfa9doXqYc"
+    },
+    {
+      "title": "asjhdehfbs kjddvnkdsvdshuf fdkjvnfdjknvri kergiregireg  egnrajenvkrnv zhxcshagvycjk.szdvnzdfiiugirg jregg",
+      "completed": false,
+      "id": "LrpfyfA42_E"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
