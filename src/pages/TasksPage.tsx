@@ -12,14 +12,9 @@ import PageLoader from '@/components/common/PageLoader';
 import { useEffect } from 'react';
 
 function TasksPage() {
-  console.log('TasksPage render');
   const dispatch = useAppDispatch();
   useEffect(() => {
-    console.log('TasksPage mounted');
-
-    return () => {
-      console.log('TasksPage unmounted');
-    };
+    return () => {};
   }, []);
 
   const tasks = useAppSelector(selectFilteredTasks);

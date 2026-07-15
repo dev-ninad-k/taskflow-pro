@@ -5,16 +5,10 @@ import { useEffect } from 'react';
 import { initApp } from '@/app/init/app-init';
 
 export function AppProvider() {
-  console.log('AppProvider render');
-
   useEffect(() => {
-    console.log('AppProvider effect START');
-
     initApp();
 
-    return () => {
-      console.log('AppProvider cleanup');
-    };
+    return () => {};
   }, []);
 
   return (

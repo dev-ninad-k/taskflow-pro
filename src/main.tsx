@@ -4,9 +4,7 @@ import './index.css';
 import { AppProvider } from '@/app/providers/AppProvider.tsx';
 import { StrictMode } from 'react';
 
-window.addEventListener('beforeunload', () => {
-  console.log('🔥 BROWSER IS RELOADING');
-});
+window.addEventListener('beforeunload', () => {});
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -26,7 +26,6 @@ export const createTaskThunk = createAsyncThunk(
 export const updateTaskThunk = createAsyncThunk(
   'tasks/updateTask',
   async (payload: UpdateTaskDto, { getState, rejectWithValue }) => {
-    console.log('UPDATE THUNK STARTED', payload);
     const state = getState() as RootState;
 
     const existing = state.tasks.entities.tasksById[payload.id];
@@ -49,7 +48,6 @@ export const updateTaskThunk = createAsyncThunk(
     };
 
     try {
-      console.log(payload.id);
       await apiClient.put(`/todos/${payload.id}`, {
         title: updatedData.title,
         completed: updatedData.completed,

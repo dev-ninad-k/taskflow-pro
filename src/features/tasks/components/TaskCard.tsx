@@ -20,7 +20,6 @@ type Props = {
 };
 
 function TaskCard({ task }: Props) {
-  console.log('TaskCard', task.id);
   const dispatch = useAppDispatch();
   const updatingIds = useAppSelector((s) => s.tasks.server.updatingIds);
   const deletingIds = useAppSelector((s) => s.tasks.server.deletingIds);
