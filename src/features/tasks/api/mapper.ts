@@ -7,7 +7,6 @@ export function mapTaskDtoToTask(dto: TaskDto): Task {
     id: String(dto.id),
     title: dto.title,
 
-    // API does NOT provide these → you must default them
     description: '',
 
     status: dto.completed ? 'done' : 'todo',
